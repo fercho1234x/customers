@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('regions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('commune_id')->constrained()->onDelete('cascade');;
-            $table->string('name', 45);
-            $table->string('last_name', 45);
-            $table->string('address');
-            $table->string('email', 120)->unique();
-            $table->string('password');
+            $table->string('name');
+            $table->string('description', 90)->nullable();
             $table->enum('status', ['A', 'I', 'trash'])->default('A');
             $table->timestamps();
             $table->softDeletes();
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('regions');
     }
 };
