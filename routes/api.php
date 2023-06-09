@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/* AUTH */
+Route::namespace('App\Http\Controllers\Auth')->group(function() {
+    Route::prefix('auth')->name('auth.')->group(function() {
+        Route::post('token', 'AuthPassportController@token');
+        Route::middleware('auth:api')->group(function () {
+            Route::get('logout', 'AuthController@logout');
+        });
+    });
+});

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->foreignId('commune_id')->constrained()->onDelete('cascade');;
+            $table->string('dni', 45);
             $table->string('name', 45);
             $table->string('last_name', 45);
             $table->string('address');
