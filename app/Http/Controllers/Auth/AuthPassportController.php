@@ -13,6 +13,7 @@ use Psr\Http\Message\ServerRequestInterface;
 class AuthPassportController extends AccessTokenController
 {
     use ApiResponser;
+
     /**
      * @param ServerRequestInterface $request
      * @return Collection|JsonResponse
