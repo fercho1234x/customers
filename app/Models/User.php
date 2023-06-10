@@ -31,7 +31,7 @@ class User extends Authenticatable
         'remember_token',
         "created_at",
         "updated_at",
-        "deleted_at"
+        "deleted_at",
     ];
 
     /**
@@ -74,5 +74,46 @@ class User extends Authenticatable
     public function setPasswordAttribute($value): void
     {
         $this->attributes['password'] = bcrypt('password');
+    }
+
+    // **********
+    // Scopes
+    // **********
+
+    /**
+     * @param $query
+     * @param $roleName
+     * @return mixed
+     */
+    public function scopeFilterByRole($query, $roleName): mixed
+    {
+        if ($roleName) {
+            return $query->whereHas('roles', function ($query) use ($roleName) {
+                $query->where('name', $roleName);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeFilterByStatus($query, $status): mixed
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * @param $query
+     * @param $word
+     * @return mixed
+     */
+    public function scopeFilterByEmailOrDNI($query, $word): mixed
+    {
+        return $query->where('email', 'LIKE', '%' . $word . '%')
+                ->orWhere('dni', 'LIKE', '%' . $word . '%');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\GeneralStatusEnum;
 use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,7 +24,10 @@ class CommuneFactory extends Factory
             'region_id' => $region->id,
             'name' => fake()->city,
             'description' => fake()->sentence(2),
-            'status' => fake()->randomElement(['A', 'I', 'trash']),
+            'status' => fake()->randomElement([
+                GeneralStatusEnum::Active,
+                GeneralStatusEnum::Inactive
+            ]),
         ];
     }
 }

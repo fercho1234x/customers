@@ -2,8 +2,11 @@
 
 namespace Database\Factories;
 
+use App\Enums\GeneralStatusEnum;
+use App\Enums\RolesEnum;
 use App\Models\Commune;
 use App\Models\Region;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -31,7 +34,24 @@ class UserFactory extends Factory
             'address' => fake()->address,
             'email' => fake()->unique()->safeEmail,
             'password' => 'password', // You may adjust this as needed
-            'status' => fake()->randomElement(['A', 'I', 'trash']),
+            'status' => fake()->randomElement([
+                GeneralStatusEnum::Active,
+                GeneralStatusEnum::Inactive
+            ]),
         ];
+    }
+
+    /**
+     * @return UserFactory
+     */
+    public function configure(): UserFactory
+    {
+        return $this->afterCreating(function (User $user) {
+            $role = fake()->randomElement([
+                RolesEnum::Administrator,
+                RolesEnum::Customer
+            ]);
+            $user->syncRoles($role);
+        });
     }
 }

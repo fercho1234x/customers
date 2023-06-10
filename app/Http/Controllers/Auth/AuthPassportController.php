@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use App\Traits\ApiResponser;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -11,6 +12,7 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class AuthPassportController extends AccessTokenController
 {
+    use ApiResponser;
     /**
      * @param ServerRequestInterface $request
      * @return Collection|JsonResponse
@@ -25,11 +27,15 @@ class AuthPassportController extends AccessTokenController
                 )
             );
             $user = User::whereEmail(request('username'))
-                ->with('commune:id,name,description')
+                ->with([
+                    'commune:id,name,description',
+                    'region:id,name,description',
+                    'roles:id,name'
+                ])
                 ->first();
-            return $token->merge(['user' => $user]);
-        } catch (Exception $exception) {
-            return response()->json(['error' => 'failed_authentication'], 401);
+            return $this->successResponse($token->merge(['user' => $user]));
+        } catch (Exception $e) {
+            return $this->errorResponse('failed_authentication', 401);
         }
     }
 

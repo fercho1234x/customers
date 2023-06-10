@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\GeneralStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -18,10 +19,16 @@ return new class extends Migration
             $table->string('dni', 45);
             $table->string('name', 45);
             $table->string('last_name', 45);
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->string('email', 120)->unique();
             $table->string('password');
-            $table->enum('status', ['A', 'I', 'trash'])->default('A');
+            $table->enum(
+                'status',
+                [
+                    GeneralStatusEnum::Active,
+                    GeneralStatusEnum::Inactive
+                ]
+            )->default(GeneralStatusEnum::Active);
             $table->timestamps();
             $table->softDeletes();
         });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\GeneralStatusEnum;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +17,13 @@ return new class extends Migration
             $table->foreignId('region_id')->constrained()->onDelete('cascade');;
             $table->string('name');
             $table->string('description', 90)->nullable();
-            $table->enum('status', ['A', 'I', 'trash'])->default('A');
+            $table->enum(
+                'status',
+                [
+                    GeneralStatusEnum::Active,
+                    GeneralStatusEnum::Inactive
+                ]
+            )->default(GeneralStatusEnum::Active);
             $table->timestamps();
             $table->softDeletes();
         });

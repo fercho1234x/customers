@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\GeneralStatusEnum;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +20,10 @@ class RegionFactory extends Factory
         return [
             'name' => fake()->text,
             'description' => fake()->sentence(2),
-            'status' => fake()->randomElement(['A', 'I', 'trash']),
+            'status' => fake()->randomElement([
+                GeneralStatusEnum::Active,
+                GeneralStatusEnum::Inactive
+            ]),
         ];
     }
 }
