@@ -18,5 +18,9 @@ class DatabaseSeeder extends Seeder
         Region::factory(10)->create();
         Commune::factory(10)->create();
         User::factory(10)->create();
+
+        $this->call([
+            RolesSeeder::class
+        ]);
     }
 }

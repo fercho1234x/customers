@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Commune;
+use App\Models\Region;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -18,9 +19,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $region = Region::inRandomOrder()->first();
         $commune = Commune::inRandomOrder()->first();
 
         return [
+            'region_id' => $region->id,
             'commune_id' => $commune->id,
             'dni' => Str::random(10),
             'name' => fake()->firstName,
