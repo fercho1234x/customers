@@ -155,7 +155,12 @@ To run the tests, execute the following command:
 php artisan test
 ```
 
-# Demo
+# LARAVEL REQUEST DOCS
+<image src="https://adsnetlog.com/prueba-customers/1.PNG" alt="">
+<image src="https://adsnetlog.com/prueba-customers/2.PNG" alt="">
+<image src="https://adsnetlog.com/prueba-customers/3.PNG" alt="">
+<image src="https://adsnetlog.com/prueba-customers/4.PNG" alt="">
+
 
 <hr>
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
