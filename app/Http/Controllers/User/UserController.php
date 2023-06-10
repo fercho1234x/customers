@@ -38,9 +38,9 @@ class UserController extends Controller
     public function index(UserIndexRequest $request): JsonResponse
     {
         try {
-            $status = $request->get('status');
-            $perPage = $request->get('per_page');
-            $role = $request->get('role');
+            $status = $request->getStatus();
+            $perPage = $request->getPerPage();
+            $role = $request->getRole();
 
             $users = User::with([
                 'region:id,name,description,status',

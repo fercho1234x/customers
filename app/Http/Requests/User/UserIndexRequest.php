@@ -46,26 +46,26 @@ class UserIndexRequest extends FormRequest
     }
 
     /**
-     * @return void
+     * @return string
      */
-    public function getStatus(): void
+    public function getStatus(): string
     {
-        $this->input('status', GeneralStatusEnum::Active);
+        return $this->input('status', GeneralStatusEnum::Active);
     }
 
     /**
-     * @return void
+     * @return string
      */
-    public function getPerPage(): void
+    public function getPerPage(): string
     {
-        $this->input('per_page', 10);
+        return $this->input('per_page', 10);
     }
 
     /**
-     * @return void
+     * @return string|null
      */
-    public function getRole(): void
+    public function getRole(): string|null
     {
-        $this->input('role');
+        return $this->input('role');
     }
 }
