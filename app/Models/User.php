@@ -55,6 +55,14 @@ class User extends Authenticatable
         return $this->belongsTo(Commune::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function region(): BelongsTo
+    {
+        return $this->belongsTo(Region::class);
+    }
+
     // **********
     // Mutators
     // **********
