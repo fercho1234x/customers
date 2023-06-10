@@ -102,10 +102,8 @@ class UserControllerTest extends TestCase
             $this->assertInstanceOf(JsonResponse::class, $response->baseResponse);
             $responseData = $response->json();
 
-            dump($responseData);
-
             $this->assertCount($combination['expectedCount'], $responseData['data']['data']);
         }
     }
-    
+
 }
